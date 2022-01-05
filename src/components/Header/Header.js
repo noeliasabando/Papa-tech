@@ -4,10 +4,11 @@ import Cart from "../Dropdown/Cart";
 import "./Header.scss";
 
 const Header = () => {
+
   return (
-    <Row className="header">
+    <Row className="header" justify="center">
       <Col className="header__title" span={22}>
-        Papa Tech
+        Proyecto Papa Tech
       </Col>
       <Col className="header__cart">
         <Cart />

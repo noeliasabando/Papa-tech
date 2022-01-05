@@ -1,0 +1,27 @@
+.productCard {
+  &__img {
+    height: 25rem;
+    width: 22rem;
+    margin-top: 40px;
+  }
+  &__containerImg {
+    position: relative;
+  }
+  &__detail {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  &__price {
+    font-size: 20px;
+    margin-bottom: 25px;
+  }
+  &__button {
+    margin: 0 8px;
+  }
+  &__name {
+    font-size: 20px;
+    margin-top: 10px;
+  }
+}
