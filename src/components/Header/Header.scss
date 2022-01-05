@@ -1,0 +1,10 @@
+.header {
+  height: 50px;
+  &__title {
+    font-size: 30px;
+  }
+  &__cart {
+    display: flex;
+    align-items: center;
+  }
+}
