@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { Row, Col, Button } from "antd";
+import { selectCart } from "../../features/cartSlice";
 import ConfirmModal from "../../components/ConfirmModal/CofirmModal";
 import "./Checkout.scss";
 
 const Checkout = () => {
+  const infoProduct = useSelector(selectCart);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
@@ -19,6 +22,10 @@ const Checkout = () => {
     setIsModalVisible(false);
   };
 
+  let sum = infoProduct.reduce((accumulator, product) => {
+    return accumulator + product.price;
+  }, 0);
+
   return (
     <Row justify="center" className="checkout">
       <Col span={10} className="checkout__card">
@@ -28,27 +35,39 @@ const Checkout = () => {
           onCancel={handleCancel}
         />
         <Row>
-          <Col span={14} className="checkout__text">
-            Nombre
+          <Col span={23} className="checkout__title">Detalle de tu compra</Col>
+        </Row>
+        <Row>
+          {infoProduct &&
+            infoProduct.map((info) => (
+              <>
+                <Col span={14} className="checkout__text">
+                  * {info.name}
+                </Col>
+                <Col className="checkout__text">${info.price}</Col>
+              </>
+            ))}
+        </Row>
+        {infoProduct.length < 1 && (
+          <Row>
+            <Col span={23} className="checkout__text">
+              Aún no has agregado productos
+            </Col>
+          </Row>
+        )}
+        <Row>
+          <Col className="checkout__total" span={22}>
+            Total ${sum}
           </Col>
-          <Col className="checkout__text">Precio</Col>
-        </Row>
-        <Row>
-          <Col span={14}>Nombre</Col>
-          <Col>Precio</Col>
-        </Row>
-        <Row>
-          <Col span={14}>Nombre</Col>
-          <Col>Precio</Col>
         </Row>
         <Row>
           <Col className="checkout__total" span={22}>
-            Total $23456
-          </Col>
-        </Row>
-        <Row>
-          <Col className="checkout__total" span={22}>
-            <Button type="primary" shape="round" onClick={showModal}>
+            <Button
+              type="primary"
+              shape="round"
+              onClick={showModal}
+              disabled={infoProduct.length < 1}
+            >
               Finalizar compra
             </Button>
           </Col>
