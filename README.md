@@ -1,7 +1,7 @@
 ## Requerimientos
 
-Versión de Node 14.16.0
-Versión de React 17.0.2
+1) Versión de Node 14.16.0
+2) Versión de React 17.0.2
 
 ## Como correr proyecto
 
